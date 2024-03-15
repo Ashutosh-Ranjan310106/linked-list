@@ -74,6 +74,7 @@ int delete_node(struct Node** head, int key){
     struct Node* temp=*head;
     if (temp!=NULL && temp->data==key){
         *head=temp->next;
+        temp->next->prev=NULL;
         free(temp);
         return 0;
     }
@@ -84,7 +85,7 @@ int delete_node(struct Node** head, int key){
         temp=temp->next;
     }
     if (temp->next==NULL){
-        if (temp->data==key){
+        if (temp->data==key){    // to deleate last element if key was at last
             temp->prev->next=NULL;
             free(temp);
             return 0;
@@ -110,7 +111,6 @@ int print_in_revese(struct Node** head){
     struct Node* temp;
     temp = *head;
     while(temp->next != NULL){
-        //printf("%d ", temp->data);
         temp = temp->next;
     }
     while(temp!= NULL){
