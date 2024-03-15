@@ -37,7 +37,7 @@ int insert_at_beginng(struct Node** head, int data){
 int insert_in_between(struct Node** head, int data,int key){
     struct Node* new_node=create_node(data);
     struct Node* temp=*head;
-    while(temp->next!=NULL){
+    while(temp!=NULL){
         if (temp->data==key){
             new_node->next=temp->next;
             temp->next->prev=new_node;
@@ -106,6 +106,20 @@ int print_linked_list(struct Node** head){
     printf("\n");
     return 0;
 }
+int print_in_revese(struct Node** head){
+    struct Node* temp;
+    temp = *head;
+    while(temp->next != NULL){
+        //printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    while(temp!= NULL){
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("\n");
+    return 0;
+}
 int main(){
     struct Node** head=create_linked_list();
     insert_at_beginng(head,20);
@@ -114,8 +128,11 @@ int main(){
     insert_at_end(head,67);
     insert_in_between(head,68,25);
     print_linked_list(head);
-    delete_node(head,45);
+    printf("\nafter deleting 20:-\n");
+    delete_node(head,20);
     print_linked_list(head);
+    printf("\nin reverse:-\n");
+    print_in_revese(head);
     
 }
 

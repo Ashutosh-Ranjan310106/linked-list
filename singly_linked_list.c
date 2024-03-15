@@ -31,19 +31,21 @@ int insert_at_beginng(struct Node** head, int data){
 }
 int insert_in_between(struct Node** head, int data,int key){
     struct Node* new_node=create_node(data);
+    
+    if (*head==NULL){
+        *head=new_node;
+        return 0;
+    }
     struct Node* temp=*head;
-    while(temp->next!=NULL){
+    while(temp!=NULL){
         if (temp->data==key){
             new_node->next=temp->next;
             temp->next=new_node;
-            break;
+            return 0;
         }
         temp=temp->next;
     }
-    if (temp->next==NULL){
         return -1;
-    }
-    return 0;
 }
 int insert_at_end(struct Node** head,int data){
     struct Node* new_node = create_node(data);
@@ -76,7 +78,7 @@ int delete_node(struct Node** head, int key){
         temp=temp->next;
     }
     if (temp->next==NULL){
-        if (temp->data==key){
+        if (temp->data==key){ // to deleate last element if key was at last
             prev->next=NULL;
             free(temp);
             return 0;
@@ -101,10 +103,21 @@ int main(){
     struct Node** head=create_linked_list();
     insert_at_beginng(head,20);
     insert_at_beginng(head,25);
-    insert_in_between(head,56,25);
+    insert_in_between(head,56,20);
     insert_at_end(head,45);
-    print_linked_list(head);
     
+    
+    print_linked_list(head);
+    struct Node* temp=*head;
+    int key =20;
+    while (temp!=NULL){
+        if (temp->data==20){
+            break;
+        }
+        temp=temp->next;
+        
+    }
+    printf("\n");
 }
 
 
